@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ca1fe841-8edc-4ac2-b76d-c14c89ef69ff" name="domeneshop" url="http://ftp.domeneshop.no">
+        <fileTransfer rootFolder="/www" host="ftp.domeneshop.no" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

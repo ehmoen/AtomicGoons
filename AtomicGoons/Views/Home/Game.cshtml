@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Game";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/game-site.css" asp-append-version="true"/>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&Audiowide&family=Balsamiq+Sans:wght@400;700&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Site.min.css" asp-append-version="true"/>
+
+    <script type="module" src="~/js/atomic-goons/main.js"></script>
+</head>
+<body>
+<div class="game-container">
+    @* <div id="atomicgoons-canvas-wrapper"> *@
+
+        <canvas id="atomicgoons-canvas"></canvas>
+
+        <div id="atomicgoons-header">
+            <div id="score-counter">3</div>
+            <div id="settings">
+                    <svg class="overview-icon">
+                                    <use href="/images/sprite.svg#volume-x-mark"></use>
+                                </svg>
+            </div>
+            <div id="music">
+                <svg class="overview-icon">
+                    <use href="/images/sprite.svg#music-solid"></use>
+                </svg>
+            </div>
+            <div id="sound">
+                <svg class="overview-icon">
+                    <use href="/images/sprite.svg#music-solid"></use>
+                </svg>
+            </div>
+        </div>
+        <div id="game-button-row-id" class="game-button-row">
+            <button type="button" id="game-button-new-id" class="game-button">New game</button>
+            <button type="button" id="game-button-home-id" class="game-button" onclick="history.back()">Home</button>
+        </div>
+    @* </div> *@
+
+</div>
+</body>
+</html>
