@@ -58,7 +58,7 @@ public class HomeController : Controller
         return View("Legends", userDataVm);
     }
     
-    public IActionResult Games()
+    public IActionResult Levels()
     {
         return View();
     }
