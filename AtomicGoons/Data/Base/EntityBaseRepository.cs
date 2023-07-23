@@ -8,8 +8,8 @@ namespace AtomicGoons.Data.Base
 {
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
-        private readonly AppDbContext _context;
-        public EntityBaseRepository(AppDbContext context)
+        private readonly AtomicGoonsDbContext _context;
+        public EntityBaseRepository(AtomicGoonsDbContext context)
         {
             _context = context;
         }

@@ -2,12 +2,12 @@
 
 public class ActionResponse
 {
-    public ActionResponse()
+    public ActionResponse(List<string> messages)
     {
-        
+        Messages = messages;
     }
     
-    public ActionResponse(bool success, string message)
+    public ActionResponse(bool success, string message, List<string> messages)
     {
         Success = success;
         Messages = new List<string>() { message };

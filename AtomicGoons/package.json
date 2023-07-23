@@ -1,4 +1,6 @@
-{
+﻿{
+  "name": "AtomicGoons",
+  "version": "1.0.0",
   "devDependencies": {
     "gulp": "4.0.2",
     "gulp-autoprefixer": "^8.0.0",
@@ -12,8 +14,5 @@
     "rimraf": "3.0.2"
   },
   "dependencies": {
-    "jquery": "^3.7.0",
-    "jquery-validation": "^1.19.5",
-    "jquery-validation-unobtrusive": "^4.0.0"
   }
 }

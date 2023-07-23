@@ -2,6 +2,7 @@
 @import "variables";
 @import "Utils/flex";
 @import "Utils/grid";
+@import "Utils/common-utils";
 
 
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
@@ -103,7 +104,9 @@ textarea {
 .identity-container {
   max-width: var(--container-max-width);
   margin: 100px auto;
-  padding: 0 var(--spacing-unit);
+  padding: 20px 40px;
+  background: var(--color-white-100);
+  border-radius: 15px;
 }
 
 .identity-container.full-width {

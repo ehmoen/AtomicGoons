@@ -6,9 +6,9 @@ namespace AtomicGoons.Data.Services;
 
 public class UserSettingsService : EntityBaseRepository<UserSetting>, IUserSettingsService
 {
-    private readonly AppDbContext _context;
+    private readonly AtomicGoonsDbContext _context;
     
-    public UserSettingsService(AppDbContext context) : base(context)
+    public UserSettingsService(Data.AtomicGoonsDbContext context) : base(context)
     {
         _context = context;
     }
@@ -17,11 +17,11 @@ public class UserSettingsService : EntityBaseRepository<UserSetting>, IUserSetti
     {
         if (userSetting.Id == 0)
         {
-            await _context.UserData.AddAsync(userSetting);
+            await _context.UserSettings.AddAsync(userSetting);
         }
         else
         {
-             _context.UserData.Update(userSetting);
+             _context.UserSettings.Update(userSetting);
         }
         
         await _context.SaveChangesAsync();
@@ -29,14 +29,14 @@ public class UserSettingsService : EntityBaseRepository<UserSetting>, IUserSetti
 
     public async Task<List<UserSetting>> GetAllUserDataAsync()
     {
-        List<UserSetting> users = await _context.UserData.Include(x => x.User).ToListAsync();
+        List<UserSetting> users = await _context.UserSettings.Include(x => x.User).ToListAsync();
 
         return users;
     }
     
     public async Task<UserSetting> GetUserDataByUserIdAsync(string userId)
     {
-        var user = await _context.UserData.FirstOrDefaultAsync(x => x.UserId == userId);
+        var user = await _context.UserSettings.FirstOrDefaultAsync(x => x.UserId == userId);
         return user;
     }
 }

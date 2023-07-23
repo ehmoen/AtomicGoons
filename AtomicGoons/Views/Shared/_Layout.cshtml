@@ -21,48 +21,47 @@
     @* <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> *@
     <link rel="preconnect" href="https://fonts.gstatic.com"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&Audiowide&family=Balsamiq+Sans:wght@400;700&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/Site.min.css" asp-append-version="true"/>
+
+    <link href="~/css/site.min.css" rel="stylesheet"/>
+
+    @* <link rel="stylesheet" href="~/css/Site.min.css" asp-append-version="true"/> *@
 
     <title>@ViewData["Title"] - AtomicGoons</title>
 </head>
 <body>
-
-<noscript>
-    You need to enable JavaScript to run this app.
-</noscript>
-
-<header class="header" id="header">
-    <nav class="navbar container">
-        <a href="#" class="brand">Atomic Goons</a>
-        <div class="burger" id="burger">
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-        </div>
-        <div class="menu" id="menu">
-            <ul class="menu-inner">
-                <li class="menu-item">
-                    <a asp-controller="Home" asp-action="Index" class="menu-link">Home</a>
-                </li>
-                <li class="menu-item">
-                    <a asp-controller="Legends" asp-action="Index" class="menu-link">Legends</a>
-                </li>
-                <li class="menu-item">
-                    <a asp-controller="AtomicGoons" asp-action="Index" class="menu-link">Play Game</a>
-                </li>
-                <partial name="_LoginPartial"/>
-            </ul>
-        </div>
-        @* <a href="#" class="menu-block">Discover</a> *@
-    </nav>
-</header>
 <div id="root">
+
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="#" class="brand">Atomic Goons</a>
+            <div class="burger" id="burger">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </div>
+            <div class="menu" id="menu">
+                <ul class="menu-inner">
+                    <li class="menu-item">
+                        <a asp-controller="Home" asp-action="Index" class="menu-link">Home</a>
+                    </li>
+                    <li class="menu-item">
+                        <a asp-controller="Legends" asp-action="Index" class="menu-link">Legends</a>
+                    </li>
+                    <li class="menu-item">
+                        <a asp-controller="AtomicGoons" asp-action="Index" class="menu-link">Play Game</a>
+                    </li>
+                    <partial name="_LoginPartial"/>
+                </ul>
+            </div>
+            @* <a href="#" class="menu-block">Discover</a> *@
+        </nav>
+    </header>
+
     <div class="main">
         @RenderBody()
     </div>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/Site.min.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

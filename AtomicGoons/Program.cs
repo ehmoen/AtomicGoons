@@ -2,6 +2,7 @@ using AtomicGoons.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using AtomicGoons.Data;
 using AtomicGoons.Data.Base;
 using AtomicGoons.Data.Services;
 
@@ -18,7 +19,7 @@ builder.Services.AddControllersWithViews();
     // });
     
 
-// builder.Services.AddScoped<IUserSettingsService, UserSettingsService>();
+builder.Services.AddScoped<IUserSettingsService, UserSettingsService>();
 
 builder.Services.AddRazorPages();
 
