@@ -1,46 +1,53 @@
-﻿const gulp = require('gulp');
-const sass = require('gulp-sass')(require('sass'));
-const ts = require('gulp-typescript');
-const sourcemaps = require('gulp-sourcemaps');
+﻿/// <binding BeforeBuild='sass, js' />
+/*
+This file in the main entry point for defining Gulp tasks and using Gulp plugins.
+Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
+*/
 
-// define paths
-const paths = {
-    scripts: {
-        src: 'Scripts/**/*.ts',
-        dest: 'wwwroot/js/'
-    },
-    styles: {
-        src: 'Styles/**/*.scss',
-        dest: 'wwwroot/css/'
-    }
-};
+const gulp = require('gulp'),
+    rimraf = require("rimraf"),
+    fs = require("fs"),
+    sass = require("gulp-sass")(require("sass")),
+    prefix = require("gulp-autoprefixer"),
+    minifyCss = require("gulp-cssmin"),
+    concat = require("gulp-concat"),
+    rename = require("gulp-rename");
 
-// compile TypeScript to JS
-gulp.task('scripts', function () {
-    return gulp.src(paths.scripts.src)
-        .pipe(sourcemaps.init())
-        .pipe(ts({
-            noImplicitAny: true,
-            module: 'ES6' 
-        }))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(paths.scripts.dest));
-});
+const paths = { webroot: "./wwwroot/" };
+const jsSource = "JavaScript/**/*.js";
+const sassSource = "Styles/**/*.scss";
 
-// compile SCSS to CSS
-gulp.task('styles', function () {
-    return gulp.src(paths.styles.src)
-        .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(paths.styles.dest));
-});
+const sassMainFile = "Styles/stylesheet.scss";
 
-// watch for changes in TypeScript and SCSS files
-gulp.task('watch', function () {
-    gulp.watch(paths.scripts.src, gulp.series('scripts'));
-    gulp.watch(paths.styles.src, gulp.series('styles'));
-});
+const cssDestinationFile = "Site.min.css";
 
-// default task
-gulp.task('default', gulp.parallel('scripts', 'styles', 'watch'));
+const jsDestination = paths.webroot + "js/Site.min.js";
+const cssDestination = paths.webroot + "css/";
+
+function watchOnly() {
+    gulp.watch(sassSource, gulp.series("sass"));
+    gulp.watch(jsSource, gulp.series("js"));
+}
+
+function styles () {
+    return gulp.src(sassMainFile)
+        .pipe(sass())
+        .pipe(prefix("last 2 versions"))
+        .pipe(minifyCss())
+        .pipe(rename(cssDestinationFile))
+        .pipe(gulp.dest(cssDestination));
+}
+
+function js () {
+    return gulp.src(jsSource)
+        .pipe(concat(jsDestination))
+        .pipe(gulp.dest('.'));
+}
+
+const build = gulp.series(gulp.parallel(js, styles));
+const watch = gulp.series(gulp.parallel(js, styles), watchOnly);
+
+exports.sass = styles;
+exports.js = js;
+exports.watch = watch;
+exports.jsAndSass = build;
