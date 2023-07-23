@@ -1,0 +1,43 @@
+﻿@model UserSettingsViewModel
+@{
+    ViewData["Title"] = "Legends";
+}
+
+<section class="section banner banner-section">
+    <div class="container legend-container">
+        <h2 class="legend-container__header">Legends</h2>
+        <ul>
+            @foreach (var user in Model.AllUserSettings)
+            {
+                <li class="legend-container__items">
+                    <div> @user.User.Email</div>
+                    <div> @user.Score</div>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+@* <input asp-for="CurrentUserData.Score" onblur="saveScore(this.value)"> *@
+@* <button type="button" class="btn-darken" onclick="saveScore(@Model.CurrentUserData.Score)">Fetch</button> *@
+@* <button class="btn-darken">Submit</button> *@
+
+@* <script> *@
+@* function saveScore(score){ *@
+@*     const formData = new FormData(); *@
+@*     formData.append("Score", score); *@
+@*         *@
+@*         fetch("/Home/Legends2/", { method: "post", body: formData}) *@
+@*             .then((response) => { *@
+@*                 if (!response.ok) { *@
+@*                     throw (`${response.status}: ${response.statusText}`); *@
+@*                 } *@
+@*                 return response.text(); *@
+@*             }) *@
+@*             .then((result) => { *@
+@*                 // const updateDiv = document.getElementById(updateDivId); *@
+@*                 // setInnerHtml(updateDiv, result); *@
+@*             }) *@
+@*             .catch((err) => console.log("ERROR:", err.message)); *@
+@*     } *@
+@* </script> *@

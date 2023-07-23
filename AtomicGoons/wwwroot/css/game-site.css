@@ -1,0 +1,190 @@
+:root {
+    --color-white-100: hsl(206, 5%, 98%);
+    --color-white-200: hsl(206, 5%, 90%);
+    --color-white-300: hsl(206, 5%, 80%);
+    --color-white-400: hsl(206, 5%, 65%);
+    --color-white-500: hsl(206, 5%, 50%);
+    --color-white-600: hsl(206, 5%, 35%);
+    --color-white-700: hsl(206, 5%, 25%);
+
+    --color-black-100: hsl(213, 20%, 9%);
+    --color-black-200: hsl(213, 23%, 8%);
+    --color-black-300: hsl(214, 21%, 6%);
+    --color-black-400: hsl(210, 21%, 6%);
+    --color-black-500: hsl(216, 22%, 4%);
+    --color-black-600: hsl(220, 18%, 3%);
+    --color-black-700: hsl(220, 27%, 2%);
+    --color-black-800: hsl(180, 20%, 1%);
+
+    --color-blue-100: hsl(214, 95%, 93%);
+    --color-blue-200: hsl(213, 97%, 87%);
+    --color-blue-300: hsl(212, 96%, 78%);
+    --color-blue-400: hsl(213, 94%, 68%);
+    --color-blue-500: hsl(217, 91%, 60%);
+    --color-blue-600: hsl(221, 83%, 53%);
+    --color-blue-700: hsl(224, 76%, 48%);
+    --color-blue-800: hsl(226, 71%, 40%);
+    --color-blue-900: hsl(224, 64%, 33%);
+
+    --shadow-small: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /*--color-primary: #30b563*/
+    --color-primary: #25bc3b
+}
+/*** reset - start ***/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Balsamiq Sans', "Rubik", sans-serif;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    color: var(--color-primary);
+    background-color: var(--color-black-800);
+}
+img, picture, video, canvas, svg {
+    /*display: block;*/
+    max-height: 100%;
+    max-width: 100%;
+}
+input, button, textarea, select {
+    font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+/*** reset - end ***/
+
+/*** game related styles - begin ***/
+.game-container {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+
+#atomicgoons-canvas-wrapper {
+    position: relative;
+
+}
+
+#atomicgoons-canvas {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    background-color: var(--color-black-600);
+    /*background: url('../images/background.png');     */
+}
+
+#atomicgoons-header {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    display: flex;
+    background: transparent;
+    width: 100%;
+    height: 70px;
+    justify-content: space-around;
+    align-items: center;
+
+}
+#atomicgoons-header > button {
+    background: transparent;
+    border: none;
+}
+
+.overview-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    fill: var(--color-primary);
+}
+
+/* Arrows */
+#arrow {
+    position: absolute;
+    top: calc(50% - 150px);
+    left: calc(50% - 150px);
+    /*color:  white;*/
+    /*background: pink;    */
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 300px solid #ffff00;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 300px solid #ffff00;
+}
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border-top: 150px solid transparent;
+    border-right: 300px solid #ffff00;
+    border-bottom: 150px solid transparent;
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 150px solid transparent;
+    border-left: 300px solid #ffff00;
+    border-bottom: 150px solid transparent;
+}
+
+
+#score-counter {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 50px;
+}
+
+/*** game related styles - begin ***/
+
+.game-button-row {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.game-button {
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 5px;
+    border: none;
+    /*min-width: 140px;*/
+    padding: 0.75rem 2rem;
+    color: hsl(206, 5%, 98%);
+    background-color: hsl(213, 23%, 8%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.visibility-hidden {
+    visibility: hidden;
+}

@@ -1,0 +1,181 @@
+﻿.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.flex-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.flex-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  > div {
+    display: inline-block;
+  }
+}
+
+.flex-left-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.flex-row-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-column-space-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-align-middle {
+  display: flex;
+
+  div, label, button, span, a, svg, select, input {
+    align-self: center;
+  }
+}
+
+.flex-center-middle {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  div, label, button, span, a, svg, select, input {
+    align-self: center;
+  }
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-start-space-between-items {
+  display: flex;
+  justify-content: flex-start;
+
+  > div, > button, > label, > span, > form, > a, > select {
+    &:not(:last-child):not(.no-visibility) {
+      margin-right: 10px;
+    }
+  }
+}
+
+.flex-start-double-space-between-items {
+  display: flex;
+  justify-content: flex-start;
+
+  > div, > button, > label, > span, > form, > a, > select {
+    &:not(:last-child):not(.no-visibility) {
+      margin-right: 20px;
+    }
+  }
+}
+
+
+.flex-start-triple-space-between-items {
+  display: flex;
+  justify-content: flex-start;
+
+  > div, > button, > label, > span, > form, > a, > select {
+    &:not(:last-child):not(.no-visibility) {
+      margin-right: 30px;
+    }
+  }
+}
+
+.flex-end-space-between-items {
+  display: flex;
+  justify-content: flex-end;
+
+  > div, > button, > label, > span, > form, > select {
+    &:not(:last-child):not(.no-visibility) {
+      margin-right: 10px;
+    }
+  }
+}
+
+.flex-align-self {
+  display: flex;
+  align-self: center;
+  align-items: center;
+}
+
+.flex-align-self-start {
+  display: flex;
+  align-self: start;
+}
+
+.flex-align-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+.flex-align-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.flex-flow-column {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.no-flex {
+  display: block;
+}

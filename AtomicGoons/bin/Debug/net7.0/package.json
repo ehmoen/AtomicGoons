@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "sass": "^1.64.0"
+  },
+  "dependencies": {
+    "jquery": "^3.7.0",
+    "jquery-validation": "^1.19.5",
+    "jquery-validation-unobtrusive": "^4.0.0"
+  }
+}
