@@ -1,50 +1,51 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
-// using SendGrid;
-// using SendGrid.Helpers.Mail;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+using MimeKit.Text;
 
 namespace AtomicGoons.Services;
 
 public class EmailSender : IEmailSender
 {
-    private readonly ILogger _logger;
+    private readonly ILogger<EmailSender> _logger;
+    private readonly EmailSenderOptions _options;
 
-    public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor,
-        ILogger<EmailSender> logger)
+    public EmailSender(IOptions<EmailSenderOptions> optionsAccessor, ILogger<EmailSender> logger)
     {
-        Options = optionsAccessor.Value;
+        _options = optionsAccessor.Value;
         _logger = logger;
     }
 
-    public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
-
     public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        if (string.IsNullOrEmpty(Options.SendGridKey))
+        if (string.IsNullOrEmpty(_options.SmtpServer))
         {
-            throw new Exception("Null SendGridKey");
+            throw new Exception("Null SMTP server configuration");
         }
-        await Execute(Options.SendGridKey, subject, message, toEmail);
+
+        await Execute(toEmail, subject, message);
     }
 
-    public async Task Execute(string apiKey, string subject, string message, string toEmail)
+    public async Task Execute(string toEmail, string subject, string message)
     {
-        // var client = new SendGridClient(apiKey);
-        // var msg = new SendGridMessage()
-        // {
-        //     From = new EmailAddress("post@eirikmoen.net", "Password Recovery"),
-        //     Subject = subject,
-        //     PlainTextContent = message,
-        //     HtmlContent = message
-        // };
-        // msg.AddTo(new EmailAddress(toEmail));
-        //
-        // // Disable click tracking.
-        // // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-        // msg.SetClickTracking(false, false);
-        // var response = await client.SendEmailAsync(msg);
-        // _logger.LogInformation(response.IsSuccessStatusCode 
-        //     ? $"Email to {toEmail} queued successfully!"
-        //     : $"Failure Email to {toEmail}");
+        var emailMessage = new MimeMessage
+        {
+            From = { new MailboxAddress(_options.SenderName, _options.SenderEmail) },
+            To = { MailboxAddress.Parse(toEmail) },
+            Subject = subject,
+            Body = new TextPart(TextFormat.Html) { Text = message }
+        };
+
+        using (var client = new SmtpClient())
+        {
+            await client.ConnectAsync(_options.SmtpServer, _options.SmtpPort, SecureSocketOptions.StartTls);
+            await client.AuthenticateAsync(_options.SmtpUsername, _options.SmtpPassword);
+            await client.SendAsync(emailMessage);
+            await client.DisconnectAsync(true);
+        }
+
+        _logger.LogInformation($"Email to {toEmail} sent successfully!");
     }
 }

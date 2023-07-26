@@ -1,3 +1,4 @@
+using System.Configuration;
 using AtomicGoons.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,12 +6,15 @@ using System.Text.Json.Serialization;
 using AtomicGoons.Data;
 using AtomicGoons.Data.Base;
 using AtomicGoons.Data.Services;
+using AtomicGoons.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AtomicGoonsDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BethanysPieShopDbContextConnection' not found.");
 
 builder.Services.AddDbContext<AtomicGoonsDbContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AtomicGoonsDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AtomicGoonsDbContext>();
 
 builder.Services.AddControllersWithViews();
     // .AddJsonOptions(options =>
@@ -19,6 +23,10 @@ builder.Services.AddControllersWithViews();
     // });
     
 
+builder.Services.Configure<EmailSenderOptions>(builder.Configuration.GetSection("EmailSenderOptions"));
+
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUserSettingsService, UserSettingsService>();
 
 builder.Services.AddRazorPages();
