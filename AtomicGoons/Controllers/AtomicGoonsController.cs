@@ -31,13 +31,13 @@ public class AtomicGoonsController : Controller
     // }
     
     [HttpPost]
-    public async Task<IActionResult> UpdateUserData(int score)
+    public async Task<IActionResult> UpdateUserSetting(int score)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         //TODO: return error and handel it...
         if (userId == null) return new JsonResult(score);
-        var userSetting = await _service.GetUserDataByUserIdAsync(userId);
+        var userSetting = await _service.GetUserSettingsByUserIdAsync(userId);
 
         if (userSetting != null)
         {
@@ -56,7 +56,7 @@ public class AtomicGoonsController : Controller
             };
         }
 
-        await _service.SaveUserDataAsync(userSetting, userId);
+        await _service.SaveUserSettingsAsync(userSetting, userId);
 
         return new JsonResult(score);
     }

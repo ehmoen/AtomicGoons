@@ -5,7 +5,7 @@ namespace AtomicGoons.Data.Services;
 
 public interface IUserSettingsService : IEntityBaseRepository<UserSetting>
 {
-    Task SaveUserDataAsync(UserSetting userSetting, string userId);
-    Task<UserSetting> GetUserDataByUserIdAsync(string userId);
-    Task<List<UserSetting>> GetAllUserDataAsync();
+    Task SaveUserSettingsAsync(UserSetting userSetting, string userId);
+    Task<UserSetting?> GetUserSettingsByUserIdAsync(string userId);
+    Task<List<UserSetting>> GetAllUserSettingsAsync();
 }

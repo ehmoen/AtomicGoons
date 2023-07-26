@@ -21,7 +21,7 @@ public class LegendsController : Controller
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        var userData = await _service.GetAllUserDataAsync();
+        var userData = await _service.GetAllUserSettingsAsync();
         
         var userSettingsViewModel = new UserSettingsViewModel()
         {

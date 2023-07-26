@@ -8,12 +8,12 @@ public class UserSettingsService : EntityBaseRepository<UserSetting>, IUserSetti
 {
     private readonly AtomicGoonsDbContext _context;
     
-    public UserSettingsService(Data.AtomicGoonsDbContext context) : base(context)
+    public UserSettingsService(AtomicGoonsDbContext context) : base(context)
     {
         _context = context;
     }
     
-    public async Task SaveUserDataAsync(UserSetting userSetting, string userId)
+    public async Task SaveUserSettingsAsync(UserSetting userSetting, string userId)
     {
         if (userSetting.Id == 0)
         {
@@ -27,14 +27,13 @@ public class UserSettingsService : EntityBaseRepository<UserSetting>, IUserSetti
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<UserSetting>> GetAllUserDataAsync()
+    public async Task<List<UserSetting>> GetAllUserSettingsAsync()
     {
-        List<UserSetting> users = await _context.UserSettings.Include(x => x.User).ToListAsync();
-
+        var users = await _context.UserSettings.Include(x => x.User).ToListAsync();
         return users;
     }
     
-    public async Task<UserSetting> GetUserDataByUserIdAsync(string userId)
+    public async Task<UserSetting?> GetUserSettingsByUserIdAsync(string userId)
     {
         var user = await _context.UserSettings.FirstOrDefaultAsync(x => x.UserId == userId);
         return user;
