@@ -2,9 +2,16 @@
 
 @if (!String.IsNullOrEmpty(Model))
 {
-    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
-    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        @Model
+    <div class="identity-container">
+        <section>
+            <h2>Confirm email</h2>
+            <hr/>
+            <div class="form-group margin-top-20">
+                @Model
+            </div>
+            <div>
+                <button type="button" class="" aria-label="Close">Close</button>
+            </div>
+        </section>
     </div>
 }

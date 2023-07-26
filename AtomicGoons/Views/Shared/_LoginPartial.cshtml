@@ -10,8 +10,8 @@
         <a asp-controller="AtomicGoons" asp-action="Index" class="menu-link">Play Game</a>
     </li>
     <li class="menu-item">
-        @* <a id="manage" class="menu-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>  *@
-        <a id="manage" class="menu-link" href="#" title="Manage account - coming soon">Hello @UserManager.GetUserName(User)!</a>
+        <a id="manage" class="menu-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        @* <a id="manage" class="menu-link" href="#" title="Manage account - coming soon">Hello @UserManager.GetUserName(User)!</a> *@
     </li>
     <li class="menu-item">
         <form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
