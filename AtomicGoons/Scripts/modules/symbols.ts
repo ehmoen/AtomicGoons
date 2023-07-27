@@ -1,7 +1,7 @@
 export class Symbols {
     constructor() { }
 
-    drawSound(context, color, offsetX, offsetY, soundOn) {
+    drawSound(context: { fillStyle: any; strokeStyle: any; beginPath: () => void; moveTo: (arg0: number, arg1: any) => void; lineTo: (arg0: number, arg1: any) => void; fill: () => void; stroke: () => void; }, color: any, offsetX: number, offsetY: any, soundOn: any) {
 
         const xOffset = offsetX - 50;
         const yOffset = offsetY;
@@ -12,8 +12,8 @@ export class Symbols {
         context.beginPath();
         context.moveTo(25 + xOffset,0 + yOffset);
         context.lineTo(10 + xOffset, 15 + yOffset);
-        context.lineTo(0 + xOffset, 15 + yOffset);
-        context.lineTo(0 + xOffset, 35 + yOffset);
+        context.lineTo(xOffset, 15 + yOffset);
+        context.lineTo(xOffset, 35 + yOffset);
         context.lineTo(10 + xOffset, 35 + yOffset);
         context.lineTo(25 + xOffset,50 + yOffset);
         context.fill();
@@ -31,7 +31,7 @@ export class Symbols {
         }
     }
 
-    drawMusic(context, color, offsetX, offsetY, musicOn) {
+    drawMusic(context: { fillStyle: any; strokeStyle: any; beginPath: () => void; moveTo: (arg0: number, arg1: any) => void; lineTo: (arg0: number, arg1: any) => void; stroke: () => void; fill: () => void; arc: (arg0: number, arg1: any, arg2: number, arg3: number, arg4: number) => void; }, color: any, offsetX: number, offsetY: any, musicOn: any) {
 
         const xOffset = offsetX - 150;
         const yOffset = offsetY;
@@ -77,7 +77,7 @@ export class Symbols {
         }
     }
 
-    drawLegend(context, color, offsetX, offsetY) {
+    drawLegend(context: { fillStyle: any; strokeStyle: any; beginPath: () => void; moveTo: (arg0: number, arg1: any) => void; lineTo: (arg0: number, arg1: any) => void; fill: () => void; arc: (arg0: number, arg1: any, arg2: number, arg3: number, arg4: number) => void; stroke: () => void; }, color: any, offsetX: number, offsetY: any) {
         const xOffset = offsetX - 250;
         const yOffset = offsetY;
 

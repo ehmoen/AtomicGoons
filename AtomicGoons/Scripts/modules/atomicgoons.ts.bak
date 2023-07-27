@@ -1,10 +1,12 @@
-import { Symbols } from './symbols.js';
-import { Arrow } from './arrow.js';
-import { Timer } from './timer.js';
-import { Goon } from './goon.js';
-import { EvilGoon } from './evil-goon.js';
+import { Symbols } from './symbols';
+import { Arrow } from './arrow';
+import { Timer } from './timer';
+import { Goon } from './goon';
+import { EvilGoon } from './evil-goon';
 
 export class AtomicGoons {
+    private background: HTMLImageElement;
+    private hero: HTMLImageElement;
     constructor(myCanvas) {
         window.addEventListener('resize', () => this.resize());
         window.addEventListener('blur', () => this.blur());

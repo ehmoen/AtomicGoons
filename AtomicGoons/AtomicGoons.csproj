@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="TagHelpers\" />
     <Folder Include="Components\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -184,6 +185,49 @@
     <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\jquery.slim.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\jquery.slim.min.map" />
     <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\main.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\modules\arrow.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\modules\atomicgoons.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\modules\evil-goon.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\modules\goon.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\modules\symbols.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\modules\timer.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\atomicgoons\modules\utils.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Scripts\atomicgoons.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Scripts\modules\arrow.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Scripts\modules\atomicgoons.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Scripts\modules\evil-goon.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Scripts\modules\goon.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Scripts\modules\symbols.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Scripts\modules\timer.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Scripts\modules\utils.ts">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,18 @@
+import {AtomicGoons} from "../atomicgoons";
+
 export class EvilGoon {
-    constructor(atomicGoons, arrow) {
+    pos: any;
+    private atomicGoons: any;
+    private explosion: HTMLImageElement;
+    private explosionTicker: number;
+    private explosionSpeed: number;
+    private totalExplosionFrame: number;
+    private currentExplosionFrame: number;
+    private shiftExplosionFrame: number;
+    private explosionFrameWidth: number;
+    private explosionFrameHeight: number;
+    isExploding: boolean;
+    constructor(atomicGoons: AtomicGoons, arrow: any) {
         this.atomicGoons = atomicGoons;
 
         this.explosion = new Image();
@@ -18,7 +31,7 @@ export class EvilGoon {
         this.isExploding = false;
     }
 
-    update(deltaTime) {
+    update(deltaTime: number) {
         if (this.isExploding) {
             if (this.currentExplosionFrame === this.totalExplosionFrame) {
                 this.currentExplosionFrame = 0;
@@ -36,7 +49,7 @@ export class EvilGoon {
         }
     }
 
-    draw(context) {
+    draw(context: { drawImage: (arg0: HTMLImageElement, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number) => void; }) {
         if (this.isExploding) {
             context.drawImage(this.explosion, 
                               this.shiftExplosionFrame, 

@@ -36,17 +36,14 @@ public class AtomicGoonsController : Controller
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         //TODO: return error and handel it...
-        if (userId == null) return new JsonResult(score);
+        if (userId == null)
+        {
+            return new JsonResult(score);
+        }
+        
         var userSetting = await _service.GetUserSettingsByUserIdAsync(userId);
 
-        if (userSetting != null)
-        {
-            if (score > userSetting.Score)
-            {
-                userSetting.Score = score;
-            }
-        }
-        else
+        if (userSetting == null)
         {
             userSetting = new UserSetting()
             {
@@ -54,6 +51,13 @@ public class AtomicGoonsController : Controller
                 Settings = "MySettings",
                 UserId = userId
             };
+        }
+        else
+        {
+            if (score > userSetting.Score)
+            {
+                userSetting.Score = score;
+            }
         }
 
         await _service.SaveUserSettingsAsync(userSetting, userId);

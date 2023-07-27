@@ -2,7 +2,7 @@ const navbarMenu = document.getElementById("menu");
 const burgerMenu = document.getElementById("burger");
 const headerMenu = document.getElementById("header");
 
-// Open Close Navbar Menu on Click Burger
+// Open Close Navbar Menu on Click Burger 
 if (burgerMenu && navbarMenu) {
     burgerMenu.addEventListener("click", () => {
         burgerMenu.classList.toggle("is-active");

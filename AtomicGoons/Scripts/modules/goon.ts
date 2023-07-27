@@ -1,5 +1,21 @@
+import {AtomicGoons} from "../atomicgoons";
+
 export class Goon {
-    constructor(atomicGoons, arrow) {
+    private atomicGoons: AtomicGoons;
+    private myImage: HTMLImageElement;
+    private shift: number;
+    private frameWidth: number;
+    private frameHeigth: number;
+    private totalFrames: number;
+    private currentFrame: number;
+    private animeTicker: number;
+    private animeSpeed: number;
+    private speed: number;
+    private pos: { x: number; y: number };
+    private direction: number;
+    private directionTicker: any;
+    private directionChangeSpeed: number;
+    constructor(atomicGoons: AtomicGoons, arrow: any) {
         this.atomicGoons = atomicGoons;
 
         this.myImage = new Image();
@@ -31,7 +47,7 @@ export class Goon {
         this.directionChangeSpeed = 5000; // * Math.random | 0;
     }
 
-    update(deltaTime) {
+    update(deltaTime: number) {
 
         this.animate(deltaTime);
         this.setDirection(deltaTime);
@@ -63,7 +79,7 @@ export class Goon {
         }
     }
 
-    animate(deltaTime) {
+    animate(deltaTime: number) {
         if (this.currentFrame === this.totalFrames) {
             this.shift = 0;
             this.currentFrame = 0;
@@ -77,7 +93,7 @@ export class Goon {
         }
     }
 
-    setDirection(deltaTime) {
+    setDirection(deltaTime: number) {
         this.directionTicker += deltaTime;
         if (this.directionTicker > this.directionChangeSpeed) {
             this.direction = 4 * Math.random() | 0;    
@@ -86,7 +102,7 @@ export class Goon {
         }
     }
 
-    drawGoon(context) {
+    drawGoon(context: { drawImage: (arg0: HTMLImageElement, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number) => void; }) {
         context.drawImage(this.myImage, this.shift, 0, this.frameWidth, this.frameHeigth, this.pos.x, this.pos.y, this.frameWidth, this.frameHeigth);
     }
 }

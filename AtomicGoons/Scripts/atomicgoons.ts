@@ -1,7 +1,7 @@
-import {Arrow} from './modules/arrow.js';
-import {Timer} from './modules/timer.js';
-import {Goon} from './modules/goon.js';
-import {EvilGoon} from './modules/evil-goon.js';
+import {Arrow} from './modules/arrow';
+import {Timer} from './modules/timer';
+import {Goon} from './modules/goon';
+import {EvilGoon} from './modules/evil-goon';
 // import {drawCircle} from './modules/utils.js';
 
 // Global const
@@ -17,14 +17,45 @@ const WIDTH = HEIGHT / 2.16;
 
 
 
-class AtomicGoons {
-    constructor(myCanvas) {
+export class AtomicGoons {
+    private myColor: string;
+    private numOfGoons: number;
+    private arrow: Arrow;
+    private timer: Timer;
+    private canvas: any;
+    private explodingGoon: EvilGoon;
+    private soundOn: boolean;
+    private musicOn: boolean;
+    private gameScene: number;
+    private isPaused: boolean;
+    width: number;
+    height: number;
+    private context: any;
+    currentWidth: any;
+    currentHeight: any;
+    private gameButtonNew: HTMLElement;
+    private soundSettings: HTMLElement;
+    private musicSettings: HTMLElement;
+    private background: HTMLImageElement;
+    private hero: HTMLImageElement;
+    private legends: HTMLImageElement;
+    private soundTrack: HTMLAudioElement;
+    private goonsInAction: HTMLAudioElement;
+    private theme: HTMLAudioElement;
+    private shoot: HTMLAudioElement;
+    private loose: HTMLAudioElement;
+    private lastAnimationFrameTime: number;
+    private tick: (time?: number) => void;
+    private pauseStartTime: number;
+    private goons: any;
+
+    constructor(myCanvas: HTMLElement, gameButtonNew: HTMLElement) {
         window.addEventListener('blur', () => this.blur());
         window.addEventListener('focus', () => this.focus());
 
         this.myColor = '#25bc3b';
         this.numOfGoons = 5;
-        scoreCounter.innerText = this.numOfGoons;
+        scoreCounter.innerText = String(this.numOfGoons);
         
         this.setupGameAssets();
         this.setupImages();
@@ -36,7 +67,7 @@ class AtomicGoons {
         this.timer = new Timer(this.callback, this.canvas.width);
         this.timer.isTimeout = false;
         
-        this.explodingGoon = new EvilGoon(this);
+        this.explodingGoon = new EvilGoon(this, null);
         
         this.newGame(this.numOfGoons);
 
@@ -52,7 +83,7 @@ class AtomicGoons {
         this.setupGameLoop();
     }
 
-    setupCanvas(myCanvas) {
+    setupCanvas(myCanvas: HTMLElement) {
         //this.ratio = WIDTH / HEIGHT; //1 / 2.16;// 
         this.canvas = myCanvas;
         this.canvas.width = WIDTH;
@@ -62,7 +93,7 @@ class AtomicGoons {
         this.height = this.canvas.height - 80;
 
         this.context = this.canvas.getContext('2d');
-        this.canvas.addEventListener('click', (e) => this.onClick(e));
+        this.canvas.addEventListener('click', (e: any) => this.onClick(e));
                 
         this.currentWidth = this.canvas.width;
         this.currentHeight = this.canvas.height;
@@ -70,7 +101,7 @@ class AtomicGoons {
 
     setupGameAssets() {
         this.gameButtonNew = gameButtonNew;
-        this.gameButtonNew.addEventListener('click', (e) => this.startNewGame(e));
+        this.gameButtonNew.addEventListener('click', () => this.startNewGame());
         this.gameButtonNew.focus();
         
         this.soundSettings = soundSettings;
@@ -120,7 +151,7 @@ class AtomicGoons {
             }
         };
 
-        setTimeout((e) => {
+        setTimeout(() => {
             this.draw();
         }, 100);
     }
@@ -148,7 +179,7 @@ class AtomicGoons {
         }
     }
     
-    toggleSound(element) {
+    toggleSound(element: HTMLElement) {
         this.soundOn = !this.soundOn;
         
         if(this.soundOn){
@@ -164,7 +195,7 @@ class AtomicGoons {
         this.playMusic();
     }
 
-    toggleMusic(element) {
+    toggleMusic(element: HTMLElement) {
         this.musicOn = !this.musicOn;
 
         if(this.musicOn){
@@ -181,11 +212,11 @@ class AtomicGoons {
     }
 
     
-    drawScore(score) {
-        scoreCounter.innerText = score;
+    drawScore(score: string | number) {
+        scoreCounter.innerText = String(score);
     }
 
-    startNewGame(e) {
+    startNewGame() {
         //if (this.gameScene === 0) {
         this.playGoonsInAction();
 
@@ -198,13 +229,14 @@ class AtomicGoons {
         //}
     }
 
-    onClick(e) {
+    onClick(e: { clientX: number; clientY: number; }) {
         let evilGoon = this.goons[0];
         // Gets CSS pos, and width/height 
         // Subtract the 'left' of the canvas from the X/Y positions to make (0,0) the top left of the canvas
         const cRect = this.canvas.getBoundingClientRect();
-        const canvasX = Math.round(e.clientX - cRect.left);   
-        const canvasY = Math.round(e.clientY - cRect.top);   
+        const {clientY, clientX} = e;
+        const canvasX = Math.round(clientX - cRect.left);   
+        const canvasY = Math.round(clientY - cRect.top);   
 
         let mousePointer = {
             x: canvasX,
@@ -247,7 +279,7 @@ class AtomicGoons {
             this.loose.play();
         }
 
-        this.saveScore(this.numOfGoons);
+        this.saveScore(String(this.numOfGoons));
         //console.log(this.numOfGoons);
 
         this.soundTrack.pause();
@@ -267,7 +299,7 @@ class AtomicGoons {
         }
     }
 
-    increaseGoons(evilGoon) {
+    increaseGoons(evilGoon: { pos: any; }) {
         if (this.soundOn) {
             this.shoot.play().then();
         }
@@ -280,27 +312,27 @@ class AtomicGoons {
         this.drawScore(this.numOfGoons);
     }
 
-    isColliding(point, goon) {
+    isColliding(point: { x: any; y: any; }, goon: { pos: { x: number; y: number; }; }) {
         if ((point.x > goon.pos.x && point.x < goon.pos.x + 70) && (point.y > goon.pos.y && point.y < goon.pos.y + 70)) {
             return true;
         }
         return false;
     }
 
-    newGame() {
+    newGame(numOfGoons: number) {
         this.goons = [];
 
         for (let i = 0; i <= this.numOfGoons - 1; i++) {
-            this.goons.push(new Goon(this));
+            this.goons.push(new Goon(this, null));
         }
     }
 
-    update(time) {
+    update(time: number) {
         if (this.explodingGoon.isExploding) {
             this.explodingGoon.update(time);
-            this.goons.forEach(g => g.animate(time));
+            this.goons.forEach((g: { animate: (arg0: number) => any; }) => g.animate(time));
         } else {
-            this.goons.forEach(g => g.update(time));
+            this.goons.forEach((g: { update: (arg0: number) => any; }) => g.update(time));
             this.arrow.update(time, this.goons[0].direction);
             this.timer.update(time);
         }
@@ -332,7 +364,7 @@ class AtomicGoons {
     }
 
     drawGameArea() {
-        this.goons.forEach(g => g.drawGoon(this.context));
+        this.goons.forEach((g: { drawGoon: (arg0: any) => any; }) => g.drawGoon(this.context));
         this.explodingGoon.draw(this.context);
     }
 
@@ -367,7 +399,10 @@ class AtomicGoons {
     }
 
 
-    saveScore(score) {
+    saveScore(score: string) {
+        
+        console.log("Save Score from js")
+        
         const formData = new FormData();
         formData.append("Score", score);
 

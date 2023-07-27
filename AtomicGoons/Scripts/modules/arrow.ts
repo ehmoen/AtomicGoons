@@ -1,5 +1,12 @@
-class Arrow {
-    constructor(atomicGoons) {
+import {AtomicGoons} from "../atomicgoons";
+
+export class Arrow {
+    private right: { y1: number; x1: number; y2: number; x2: any; y3: any; x3: number };
+    private left: { y1: number; x1: number; y2: number; x2: number; y3: any; x3: number };
+    private up: { y1: number; x1: number; y2: number; x2: number; y3: number; x3: any };
+    private down: { y1: number; x1: number; y2: any; x2: number; y3: number; x3: any };
+    private arrowDirection: { y1: number; x1: number; y2: number; x2: any; y3: any; x3: number };
+    constructor(atomicGoons: AtomicGoons) {
         //this.atomicGoons = atomicGoons;
         //this.arrowDirection;
 
@@ -14,7 +21,7 @@ class Arrow {
         this.down = {x1: 0, y1: gameWidth / 2 + offsetY, x2: gameWidth / 2, y2: gameWidth + offsetY, x3: gameWidth, y3: gameWidth / 2 + offsetY};
     }
 
-    update(deltaTime, direction) {
+    update(_deltaTime: number, direction: number) {
         if (direction === 0) { 
             this.arrowDirection = this.right;
         }
@@ -29,7 +36,7 @@ class Arrow {
         }
     }
 
-    draw(context, color) {
+    draw(context: { fillStyle: any; beginPath: () => void; moveTo: (arg0: number, arg1: number) => void; lineTo: (arg0: number, arg1: number) => void; fill: () => void; }, color: string) {
         context.fillStyle = color;
         context.beginPath();        
         context.moveTo(this.arrowDirection.x1, this.arrowDirection.y1);
@@ -38,5 +45,3 @@ class Arrow {
         context.fill();
     }
 }
-
-export { Arrow };

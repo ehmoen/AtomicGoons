@@ -1,5 +1,12 @@
 export class Timer {
-    constructor(atomicGoonsCallback, timeLeft) {
+    isTimeout: boolean;
+    private atomicGoonsCallback: any;
+    private startPosition: number;
+    private fullPosition: any;
+    private timeLeft: any;
+    private timerTicker: number;
+    private timerSpeed: number;
+    constructor(atomicGoonsCallback: () => void, timeLeft: any) {
         this.atomicGoonsCallback = atomicGoonsCallback;
         this.startPosition = 0;
         this.fullPosition = timeLeft;
@@ -9,7 +16,7 @@ export class Timer {
         this.isTimeout = false;
     }
 
-    update(deltaTime) {
+    update(deltaTime: number) {
         //console.log(this.timerSpeed);
         this.timerTicker += deltaTime;
         if(this.timerTicker > this.timerSpeed) {
@@ -27,7 +34,7 @@ export class Timer {
         }
     }
 
-    draw(context, color) {
+    draw(context: { fillStyle: any; beginPath: () => void; moveTo: (arg0: number, arg1: number) => void; lineTo: (arg0: number, arg1: number) => void; fill: () => void; }, color: string) {
         context.fillStyle = color;
         context.beginPath();
         context.moveTo(this.startPosition, 0);
@@ -38,7 +45,7 @@ export class Timer {
         context.fill();
     }
 
-    reset(numberOfGoons) {
+    reset(numberOfGoons: number) {
         this.timerSpeed = 10 + numberOfGoons*2;
         this.timeLeft = this.fullPosition;
     }
