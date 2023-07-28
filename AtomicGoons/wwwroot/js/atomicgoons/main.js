@@ -367,7 +367,7 @@ class AtomicGoons {
     }
 
 
-    saveScore(score) {
+    saveScore(score) { console.log("XXX")
         const formData = new FormData();
         formData.append("Score", score);
 
