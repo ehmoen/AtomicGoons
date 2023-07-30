@@ -9,15 +9,22 @@
         <div class="form-group margin-top-20">
             <label asp-for="Input.Email">Email</label>
             <input asp-for="Input.Email" class="" autocomplete="username" aria-required="true" placeholder="name@example.com"/>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Input.Password">Password</label>
             <input asp-for="Input.Password" class="" autocomplete="new-password" aria-required="true" placeholder="password"/>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Input.ConfirmPassword">Confirm Password</label>
             <input asp-for="Input.ConfirmPassword" class="" autocomplete="new-password" aria-required="true" placeholder="password"/>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
         </div>
         <button id="registerSubmit" type="submit" class="push-right">Register</button>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
